@@ -2,7 +2,7 @@ from itertools import product
 from bruteforce_option import Option
 import string
 import hashlib
-
+from dictionary_attack import dictionary_attack
 nums = '0123456789'
 letters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
 sepc_chars = '!@#$%^&*()-_+=~`[]{\}|\:;"\'<>,.?/'
@@ -22,7 +22,10 @@ def search(charset,pass_hash):
                 if digest == pass_hash:
                     return ''.join(item)
     return False
-def brute_force_attack(pass_hash, option, possible_len):
+def brute_force_attack(pass_hash, option, possible_len, word_list):
+    result = dictionary_attack(word_list, pass_hash)
+    if result != False:
+        return result
     if option.value == 0:
         return search(nums,pass_hash)
     elif option.value == 1:
