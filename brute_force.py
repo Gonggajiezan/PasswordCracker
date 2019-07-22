@@ -16,11 +16,16 @@ def search(charset,pass_hash):
              
             for item in product(charset, repeat=i):
                 #print (''.join(item))
-                encypt_word = ''.join(item).encode('utf-8')
+                result = ''.join(item)
+                encypt_word = result.encode('utf-8')
                 digest = hashlib.md5(encypt_word.strip()).hexdigest()
                 # print (encypt_word)
                 if digest == pass_hash:
-                    return ''.join(item)
+                    print("Storing result to the dictionary...")
+                    with open("dictonary10k.txt", "a") as myfile:
+                        myfile.write("\n"+result)
+                    print("Storing complete")
+                    return result
     return False
 def brute_force_attack(pass_hash, option, possible_len, word_list):
     result = dictionary_attack(word_list, pass_hash)

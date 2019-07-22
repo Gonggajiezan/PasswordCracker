@@ -22,11 +22,10 @@ else:
     quit()
     
 
-print (result)
 if result != False:
     print("Password found")
     print("Password is "+ result)
 else:
-    print("Password is not found in the dictionary.")
+    print("Password is not found.")
 
 
